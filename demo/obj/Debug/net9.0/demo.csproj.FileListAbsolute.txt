@@ -1,0 +1,14 @@
+D:\des\caso-algoritmos-claure\demo\bin\Debug\net9.0\demo.exe
+D:\des\caso-algoritmos-claure\demo\bin\Debug\net9.0\demo.deps.json
+D:\des\caso-algoritmos-claure\demo\bin\Debug\net9.0\demo.runtimeconfig.json
+D:\des\caso-algoritmos-claure\demo\bin\Debug\net9.0\demo.dll
+D:\des\caso-algoritmos-claure\demo\bin\Debug\net9.0\demo.pdb
+D:\des\caso-algoritmos-claure\demo\obj\Debug\net9.0\demo.GeneratedMSBuildEditorConfig.editorconfig
+D:\des\caso-algoritmos-claure\demo\obj\Debug\net9.0\demo.AssemblyInfoInputs.cache
+D:\des\caso-algoritmos-claure\demo\obj\Debug\net9.0\demo.AssemblyInfo.cs
+D:\des\caso-algoritmos-claure\demo\obj\Debug\net9.0\demo.csproj.CoreCompileInputs.cache
+D:\des\caso-algoritmos-claure\demo\obj\Debug\net9.0\demo.dll
+D:\des\caso-algoritmos-claure\demo\obj\Debug\net9.0\refint\demo.dll
+D:\des\caso-algoritmos-claure\demo\obj\Debug\net9.0\demo.pdb
+D:\des\caso-algoritmos-claure\demo\obj\Debug\net9.0\demo.genruntimeconfig.cache
+D:\des\caso-algoritmos-claure\demo\obj\Debug\net9.0\ref\demo.dll
