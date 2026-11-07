@@ -1,0 +1,9 @@
+Padrón: 1,000,000 carnets · Consultas: 10,000
+
+[SOLUCIÓN A] Recorrer la lista uno por uno:    ~1000 ms  (3304 encontrados)
+[SOLUCIÓN B] Preguntar a la estructura correcta:   ~1 ms  (3304 encontrados)
+
+Mismo problema. Misma respuesta. La diferencia es EL ALGORITMO.
+De eso se trata esta materia: decidir con evidencia, no por intuición.
+
+(Los milisegundos varian segun la maquina: en cada computadora el numero exacto es distinto. Lo que no cambia es la diferencia de orden de magnitud.)

@@ -1,0 +1,12 @@
+PROTOCOLO: 1 corrida de calentamiento + 5 corridas medidas + promedio.
+
+           n     promedio    ratio vs anterior
+     250,000      0.09 ms                    —
+   1,000,000      0.36 ms                 x4.0
+   4,000,000      2.21 ms                 x6.1
+  16,000,000      9.37 ms                 x4.2
+
+Datos x4 → el tiempo debería subir ~x4 en cada salto si la búsqueda del máximo es O(n).
+Los saltos sueltos se desvían por el RUIDO: se mira la tendencia y se repite si hace falta.
+
+(Los milisegundos y los cocientes por salto varian segun la maquina y la corrida: en cada computadora y en cada corrida salen distintos. Lo que cuenta es la tendencia, no un numero suelto.)
