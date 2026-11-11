@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\des\\caso-algoritmos-claure\\Ejemplos\\ej1\\codigo\\demo\\demo.csproj": {}
+    "D:\\des\\caso-algoritmos-claure\\Ejemplos\\ej1\\codigo\\demo\\demo.csproj": {}
   },
   "projects": {
-    "d:\\des\\caso-algoritmos-claure\\Ejemplos\\ej1\\codigo\\demo\\demo.csproj": {
+    "D:\\des\\caso-algoritmos-claure\\Ejemplos\\ej1\\codigo\\demo\\demo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\des\\caso-algoritmos-claure\\Ejemplos\\ej1\\codigo\\demo\\demo.csproj",
+        "projectUniqueName": "D:\\des\\caso-algoritmos-claure\\Ejemplos\\ej1\\codigo\\demo\\demo.csproj",
         "projectName": "demo",
-        "projectPath": "d:\\des\\caso-algoritmos-claure\\Ejemplos\\ej1\\codigo\\demo\\demo.csproj",
+        "projectPath": "D:\\des\\caso-algoritmos-claure\\Ejemplos\\ej1\\codigo\\demo\\demo.csproj",
         "packagesPath": "C:\\Users\\joha\\.nuget\\packages\\",
-        "outputPath": "d:\\des\\caso-algoritmos-claure\\Ejemplos\\ej1\\codigo\\demo\\obj\\",
+        "outputPath": "D:\\des\\caso-algoritmos-claure\\Ejemplos\\ej1\\codigo\\demo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\joha\\AppData\\Roaming\\NuGet\\NuGet.Config",
