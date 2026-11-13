@@ -1,0 +1,15 @@
+D:\des\caso-algoritmos-claure\practicas\C4\torneo\bin\Release\net9.0\Torneo.exe
+D:\des\caso-algoritmos-claure\practicas\C4\torneo\bin\Release\net9.0\Torneo.deps.json
+D:\des\caso-algoritmos-claure\practicas\C4\torneo\bin\Release\net9.0\Torneo.runtimeconfig.json
+D:\des\caso-algoritmos-claure\practicas\C4\torneo\bin\Release\net9.0\Torneo.dll
+D:\des\caso-algoritmos-claure\practicas\C4\torneo\bin\Release\net9.0\Torneo.pdb
+D:\des\caso-algoritmos-claure\practicas\C4\torneo\obj\Release\net9.0\Torneo.GeneratedMSBuildEditorConfig.editorconfig
+D:\des\caso-algoritmos-claure\practicas\C4\torneo\obj\Release\net9.0\Torneo.AssemblyInfoInputs.cache
+D:\des\caso-algoritmos-claure\practicas\C4\torneo\obj\Release\net9.0\Torneo.AssemblyInfo.cs
+D:\des\caso-algoritmos-claure\practicas\C4\torneo\obj\Release\net9.0\Torneo.csproj.CoreCompileInputs.cache
+D:\des\caso-algoritmos-claure\practicas\C4\torneo\obj\Release\net9.0\Torneo.sourcelink.json
+D:\des\caso-algoritmos-claure\practicas\C4\torneo\obj\Release\net9.0\Torneo.dll
+D:\des\caso-algoritmos-claure\practicas\C4\torneo\obj\Release\net9.0\refint\Torneo.dll
+D:\des\caso-algoritmos-claure\practicas\C4\torneo\obj\Release\net9.0\Torneo.pdb
+D:\des\caso-algoritmos-claure\practicas\C4\torneo\obj\Release\net9.0\Torneo.genruntimeconfig.cache
+D:\des\caso-algoritmos-claure\practicas\C4\torneo\obj\Release\net9.0\ref\Torneo.dll
