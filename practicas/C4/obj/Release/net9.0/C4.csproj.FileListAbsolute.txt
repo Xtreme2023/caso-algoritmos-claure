@@ -1,0 +1,15 @@
+D:\des\caso-algoritmos-claure\practicas\C4\bin\Release\net9.0\C4.exe
+D:\des\caso-algoritmos-claure\practicas\C4\bin\Release\net9.0\C4.deps.json
+D:\des\caso-algoritmos-claure\practicas\C4\bin\Release\net9.0\C4.runtimeconfig.json
+D:\des\caso-algoritmos-claure\practicas\C4\bin\Release\net9.0\C4.dll
+D:\des\caso-algoritmos-claure\practicas\C4\bin\Release\net9.0\C4.pdb
+D:\des\caso-algoritmos-claure\practicas\C4\obj\Release\net9.0\C4.GeneratedMSBuildEditorConfig.editorconfig
+D:\des\caso-algoritmos-claure\practicas\C4\obj\Release\net9.0\C4.AssemblyInfoInputs.cache
+D:\des\caso-algoritmos-claure\practicas\C4\obj\Release\net9.0\C4.AssemblyInfo.cs
+D:\des\caso-algoritmos-claure\practicas\C4\obj\Release\net9.0\C4.csproj.CoreCompileInputs.cache
+D:\des\caso-algoritmos-claure\practicas\C4\obj\Release\net9.0\C4.sourcelink.json
+D:\des\caso-algoritmos-claure\practicas\C4\obj\Release\net9.0\C4.dll
+D:\des\caso-algoritmos-claure\practicas\C4\obj\Release\net9.0\refint\C4.dll
+D:\des\caso-algoritmos-claure\practicas\C4\obj\Release\net9.0\C4.pdb
+D:\des\caso-algoritmos-claure\practicas\C4\obj\Release\net9.0\C4.genruntimeconfig.cache
+D:\des\caso-algoritmos-claure\practicas\C4\obj\Release\net9.0\ref\C4.dll

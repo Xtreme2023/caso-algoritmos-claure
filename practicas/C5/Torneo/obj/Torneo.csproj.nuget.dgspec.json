@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\des\\caso-algoritmos-claure\\practicas\\C5\\torneo\\Torneo.csproj": {}
+    "D:\\des\\caso-algoritmos-claure\\practicas\\C5\\Torneo\\Torneo.csproj": {}
   },
   "projects": {
-    "D:\\des\\caso-algoritmos-claure\\practicas\\C5\\torneo\\Torneo.csproj": {
+    "D:\\des\\caso-algoritmos-claure\\practicas\\C5\\Torneo\\Torneo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\des\\caso-algoritmos-claure\\practicas\\C5\\torneo\\Torneo.csproj",
+        "projectUniqueName": "D:\\des\\caso-algoritmos-claure\\practicas\\C5\\Torneo\\Torneo.csproj",
         "projectName": "Torneo",
-        "projectPath": "D:\\des\\caso-algoritmos-claure\\practicas\\C5\\torneo\\Torneo.csproj",
+        "projectPath": "D:\\des\\caso-algoritmos-claure\\practicas\\C5\\Torneo\\Torneo.csproj",
         "packagesPath": "C:\\Users\\joha\\.nuget\\packages\\",
-        "outputPath": "D:\\des\\caso-algoritmos-claure\\practicas\\C5\\torneo\\obj\\",
+        "outputPath": "D:\\des\\caso-algoritmos-claure\\practicas\\C5\\Torneo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\joha\\AppData\\Roaming\\NuGet\\NuGet.Config",
