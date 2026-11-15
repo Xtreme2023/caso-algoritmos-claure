@@ -39,4 +39,4 @@ JIT y se informa el promedio de tres corridas posteriores.
 
 Los cocientes de la tabla son evidencia empírica del crecimiento, no una
 igualdad exacta: constantes de implementación, asignaciones y el hardware
-pueden cambiar su valor sin cambiar la clase Big-O.
+pueden cambiar su valor sin cambiar la clase Big-O.   
