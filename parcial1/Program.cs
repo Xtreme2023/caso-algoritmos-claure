@@ -28,7 +28,7 @@ public static class Registro
         
         // Se trabaja sobre una copia para no modificar la lista original
         int[] copia = (int[])carnets.Clone();
-        Array.Sort(copia); // Ordenamiento: O(n log n)
+        Array.Sort(copia); // O(n log n) orden
         
         // Recorrido lineal: O(n)
         for (int i = 0; i < copia.Length - 1; i++)

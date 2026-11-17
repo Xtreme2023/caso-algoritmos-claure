@@ -1,4 +1,6 @@
 Cristofer Johany Claure Cabrera
+codigo 
+
 public static bool HayRepetidosCurado(int[] carnets)
     {
         if (carnets.Length <= 1) return false;
@@ -14,6 +16,7 @@ public static bool HayRepetidosCurado(int[] carnets)
         }
         return false;
     }
+    
 -PROTOCOLO DE MEDICION -
 N=10000  | Lenta:   150 milisegundos | Curada:    0 milisegundos
 N=20000  | Lenta:   589 milisegundos | Curada:    1 milisegundos
