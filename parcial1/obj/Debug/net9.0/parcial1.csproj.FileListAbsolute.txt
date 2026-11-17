@@ -1,0 +1,15 @@
+D:\des\caso-algoritmos-claure\parcial1\bin\Debug\net9.0\parcial1.exe
+D:\des\caso-algoritmos-claure\parcial1\bin\Debug\net9.0\parcial1.deps.json
+D:\des\caso-algoritmos-claure\parcial1\bin\Debug\net9.0\parcial1.runtimeconfig.json
+D:\des\caso-algoritmos-claure\parcial1\bin\Debug\net9.0\parcial1.dll
+D:\des\caso-algoritmos-claure\parcial1\bin\Debug\net9.0\parcial1.pdb
+D:\des\caso-algoritmos-claure\parcial1\obj\Debug\net9.0\parcial1.GeneratedMSBuildEditorConfig.editorconfig
+D:\des\caso-algoritmos-claure\parcial1\obj\Debug\net9.0\parcial1.AssemblyInfoInputs.cache
+D:\des\caso-algoritmos-claure\parcial1\obj\Debug\net9.0\parcial1.AssemblyInfo.cs
+D:\des\caso-algoritmos-claure\parcial1\obj\Debug\net9.0\parcial1.csproj.CoreCompileInputs.cache
+D:\des\caso-algoritmos-claure\parcial1\obj\Debug\net9.0\parcial1.sourcelink.json
+D:\des\caso-algoritmos-claure\parcial1\obj\Debug\net9.0\parcial1.dll
+D:\des\caso-algoritmos-claure\parcial1\obj\Debug\net9.0\refint\parcial1.dll
+D:\des\caso-algoritmos-claure\parcial1\obj\Debug\net9.0\parcial1.pdb
+D:\des\caso-algoritmos-claure\parcial1\obj\Debug\net9.0\parcial1.genruntimeconfig.cache
+D:\des\caso-algoritmos-claure\parcial1\obj\Debug\net9.0\ref\parcial1.dll
