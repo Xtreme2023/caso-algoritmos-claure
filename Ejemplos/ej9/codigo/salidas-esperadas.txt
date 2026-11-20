@@ -1,0 +1,52 @@
+SALIDAS ESPERADAS · clase 9 · árboles y BST
+Partes A y B: exactas, iguales en cualquier computadora. Partes C y D (milisegundos): VARÍAN con la máquina y tienen ruido (caché de la CPU); lo que se repite es la forma:
+la lista crece con n al buscar rangos, el árbol casi no; armar un BST con claves ya ordenadas cuesta ~x4 al duplicar n.
+Se obtiene con: dotnet run -c Release -- todo   (~10 s; o -- arbol | altura | rangos | degenerado)
+
+PARTE A · UN BST CON 8 CLAVES
+  Se insertan, en este orden: 50, 30, 70, 20, 40, 60, 80, 35
+  El árbol «acostado» (la raíz a la izquierda; arriba van los mayores):
+                80
+          70
+                60
+    50
+                40
+                      35
+          30
+                20
+
+  Buscar 35: pregunto por 50 → 30 → 40 → 35  → ENCONTRADO en 4 comparaciones (de 8 claves)
+  Buscar 65: pregunto por 50 → 70 → 60  → NO ESTÁ en 3 comparaciones (de 8 claves)
+
+  Inorden (izquierda, nodo, derecha): 20 30 35 40 50 60 70 80   ← sale ORDENADO sin ordenar
+  Preorden (nodo, izquierda, derecha): 50 30 20 40 35 70 60 80   ← sirve para COPIAR el árbol
+
+====================================================================================================
+PARTE B · EL COSTO DE BUSCAR EN UN BST ES SU ALTURA
+        n   datos llegan   altura   log2 n   comparaciones por búsqueda
+    1,000        al azar       24     10.0                         12.3
+    1,000   YA ORDENADOS    1,000     10.0                        500.5
+   10,000        al azar       31     13.3                         15.8
+   10,000   YA ORDENADOS   10,000     13.3                       5000.5
+
+  Datos al azar: el árbol sale bastante parejo, altura de 2 a 3 veces log n, ~16 comparaciones por búsqueda con 10.000 claves.
+  Datos YA ORDENADOS: cada clave nueva cuelga a la derecha de la anterior. El árbol es una LISTA: altura n, ~5.000 comparaciones.
+  La cura se llama BALANCEO (AVL, árboles rojinegros): el árbol se reacomoda solo para no degenerar. Aquí es una noción; no se implementa.
+
+====================================================================================================
+PARTE C · «¿CUÁNTOS VALORES HAY ENTRE lo Y hi?»  200 consultas, cada una con ~100 valores en el rango
+  (el árbol es SortedSet de .NET, un árbol rojinegro BALANCEADO; la lista no tiene orden: hay que mirarla toda)
+           n  List (recorrer todo) ms      x    SortedSet (árbol) ms      x
+     200,000                    106.0      —                    1.31      —
+     400,000                    214.3   x2.0                    1.01   x0.8
+     800,000                    288.0   x1.3                    0.17   x0.2
+   1,600,000                    428.1   x1.5                    0.17   x1.0
+  El árbol salta al primer valor del rango (log n) y solo recorre los ~100 que hay. Un hash no puede: no sabe de orden.
+
+====================================================================================================
+PARTE D · ARMAR UN BST PROPIO CON CLAVES YA ORDENADAS (el peor caso)
+         n   armar el árbol ms      x   (n²/2 pasos: al duplicar n, ~x4)
+     5,000                23.1      —
+    10,000                75.4   x3.3
+    20,000               300.2   x4.0
+  Un árbol que degenera cuesta lo mismo que una lista. Por eso las librerías usan árboles BALANCEADOS.

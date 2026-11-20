@@ -1,0 +1,68 @@
+SALIDAS ESPERADAS · clase 7 (segunda mitad) · pilas, colas y listas
+Las trazas (partes A y B) y la tabla de costos (D) son exactas. Los milisegundos de las partes B y C VARÍAN con la máquina y la corrida; lo que se repite es la FORMA:
+List.RemoveAt(0) ~x4 al duplicar n, Queue casi plana; List.Insert(0) ~x4, LinkedList.AddFirst en décimas de ms (ruido); leer la posición i: List instantáneo, LinkedList caminando.
+Se obtiene con: dotnet run -c Release -- todo   (~8 s; o -- pila | cola | listas | mapa)
+
+PARTE A · LA PILA: ¿están bien cerrados los paréntesis?
+  Texto: {[()]}
+    lee '{'  → apilo           pila (fondo → cima): {
+    lee '['  → apilo           pila (fondo → cima): { [
+    lee '('  → apilo           pila (fondo → cima): { [ (
+    lee ')'  → coincide, desapilo  pila (fondo → cima): { [
+    lee ']'  → coincide, desapilo  pila (fondo → cima): {
+    lee '}'  → coincide, desapilo  pila (fondo → cima): (vacía)
+  Resultado: BIEN CERRADO
+
+  Texto: {[(])}
+    lee '{'  → apilo           pila (fondo → cima): {
+    lee '['  → apilo           pila (fondo → cima): { [
+    lee '('  → apilo           pila (fondo → cima): { [ (
+    lee ']'  → NO coincide con el tope ('(')
+  Resultado: MAL CERRADO
+
+Apilar (Push) y desapilar (Pop) cuestan O(1): siempre se toca solo la cima. Es lo que usa «Deshacer» de un editor.
+
+====================================================================================================
+PARTE B · LA COLA: la fila del banco
+  llega Ana    → fila: [Ana]
+  llega Beto   → fila: [Ana, Beto]
+  llega Carla  → fila: [Ana, Beto, Carla]
+  llega Diego  → fila: [Ana, Beto, Carla, Diego]
+  atienden a Ana    → fila: [Beto, Carla, Diego]
+  atienden a Beto   → fila: [Carla, Diego]
+  atienden a Carla  → fila: [Diego]
+  atienden a Diego  → fila: []
+
+Encolar y desencolar cuestan O(1) con una cola de verdad. ¿Y si usamos una lista y sacamos siempre el primero?
+
+        n   Queue ms      x   List.RemoveAt(0) ms      x
+   10,000       0.05      —                  56.4      —
+   20,000       0.12   x2.3                 187.0   x3.3
+   40,000       0.18   x1.4                 737.5   x3.9
+Sacar siempre el primero de una lista obliga a correr TODOS los demás un lugar: O(n) cada vez, O(n²) en total.
+
+====================================================================================================
+PARTE C · DOS FORMAS DE GUARDAR UNA LISTA
+  Arreglo (List<T>): casillas pegadas en memoria → saltar a la posición i es directo, pero meter al inicio corre todo.
+  Lista enlazada (LinkedList<T>): cada nodo apunta al siguiente → meter al inicio es atar un nodo, pero llegar a la posición i es caminar.
+
+  C1 · INSERTAR al inicio, n veces
+          n   List.Insert(0) ms      x   LinkedList.AddFirst ms      x
+     20,000                13.5      —                     0.70      —
+     40,000                57.3   x4.3                     1.03   x1.5
+     80,000               233.1   x4.1                     2.56   x2.5
+
+  C2 · LEER 1.000 veces el elemento de la mitad (lista de 100.000)
+  List[i]         :     0.01 ms
+  LinkedList (caminando nodo a nodo):    107.9 ms
+
+No hay una estructura «mejor»: hay operaciones que HACES MÁS. Elegir la estructura es elegir cuáles operaciones salen baratas.
+
+====================================================================================================
+PARTE D · EL MAPA (peor caso, n datos)
+  operación                          arreglo   lista enlazada  pila / cola 
+  leer la posición i                 O(1)      O(n)            —           
+  insertar o borrar al inicio        O(n)      O(1)            O(1)        
+  insertar al final                  O(1)*     O(1)**          O(1)        
+  buscar un valor                    O(n)      O(n)            O(n)        
+  * amortizado: de vez en cuando el arreglo crece y copia.   ** si se guarda el puntero al último nodo.

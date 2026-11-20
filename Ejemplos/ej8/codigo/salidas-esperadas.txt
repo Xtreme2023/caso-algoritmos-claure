@@ -1,0 +1,75 @@
+SALIDAS ESPERADAS · clase 8 · tablas hash
+Partes A, B y D: exactas, iguales en cualquier computadora. Parte C (milisegundos): VARÍA con la máquina y es ruidosa; lo que se repite es la forma (la lista crece con n, el hash se queda en microsegundos).
+Se obtiene con: dotnet run -c Release -- todo   (~10 s; o -- funcion | tabla | medir | palabras)
+
+PARTE A · LA FUNCIÓN HASH: de la clave al casillero
+hash(clave) = (suma de los códigos de sus letras) mod 7      → 7 casilleros, del 0 al 6
+
+  Ana     → casillero 6
+  Beto    → casillero 2
+  Carla   → casillero 0
+  Diego   → casillero 5
+  Elena   → casillero 2   ← COLISIÓN: ya había Beto
+  Fabian  → casillero 3
+  Gaby    → casillero 2   ← COLISIÓN: ya había Beto, Elena
+  Hugo    → casillero 4
+
+La tabla queda así (cada casillero guarda su propia lista: «encadenamiento»):
+  [0] Carla
+  [1] (vacío)
+  [2] Beto → Elena → Gaby
+  [3] Fabian
+  [4] Hugo
+  [5] Diego
+  [6] Ana
+
+Buscar «Gaby»: calculo hash → voy DIRECTO al casillero y miro solo esa lista. No recorro las 8 claves.
+
+====================================================================================================
+PARTE B · UNA TABLA HASH PROPIA: ¿cuántas comparaciones por búsqueda?
+
+B1 · LA FUNCIÓN IMPORTA. 1.000 claves, todas múltiplos de 10 (0, 10, 20, ... 9.990); 1.009 casilleros.
+  función                             cadena más larga   comparaciones por búsqueda (promedio)
+  clave mod 10  (mala con estas claves)             1,000                                  500.50
+  clave mod 1.009  (primo)                           1                                    1.00
+  Con la función mala todas las claves caen en el casillero 0: la tabla se vuelve UNA lista de 1.000 (O(n)).
+
+B2 · EL FACTOR DE CARGA α = datos / casilleros. 101 casilleros fijos, claves al azar.
+    datos  casilleros      α   comparaciones (real)   1 + α/2 (teoría)
+      101         101    1.0                   1.54               1.50
+      202         101    2.0                   1.95               2.00
+      404         101    4.0                   3.17               3.00
+      808         101    8.0                   4.99               5.00
+    1,616         101   16.0                   8.99               9.00
+  Si los casilleros NO crecen, cada búsqueda cuesta ~α: vuelve a ser O(n).
+
+B3 · LA CURA: CRECER (rehash). Cuando α pasa de 0,75 se duplican los casilleros y se reubican las claves.
+    datos  casilleros      α   comparaciones (real)
+      101         202   0.50                   1.31
+      202         404   0.50                   1.26
+      404         808   0.50                   1.27
+      808       1,616   0.50                   1.24
+    1,616       3,232   0.50                   1.23
+  Con α acotada, la búsqueda cuesta casi 1 comparación sin importar n: O(1) en promedio.
+
+====================================================================================================
+PARTE C · LISTA CONTRA HASH: 1.000 búsquedas de claves que NO están (el peor caso)
+         n   List.Contains ms      x   HashSet.Contains ms      x   armar el HashSet ms
+   500,000              75.04      —                 0.009      —                   6.5
+ 1,000,000              66.20   x0.9                 0.009   x1.1                  12.3
+ 2,000,000             226.73   x3.4                 0.113  x12.1                  24.4
+ 4,000,000             710.92   x3.1                 0.014   x0.1                  50.8
+
+Doble de datos: la lista tarda ~x2 en teoría (acá hay ruido de caché y de CPU: mira la tendencia, no cada fila); el hash sigue en microsegundos.
+Armar el HashSet cuesta O(n) UNA vez y se paga si vas a buscar muchas veces.
+
+====================================================================================================
+PARTE D · UN DICCIONARIO (clave → valor): contar cuántas veces aparece cada palabra
+  El texto tiene 32 palabras y 19 distintas. Las más repetidas:
+    tiempo   5
+    de       4
+    y        3
+    lo       2
+    su       2
+
+  Cada palabra se busca y se actualiza en O(1) promedio: contar n palabras cuesta O(n), no O(n²).
