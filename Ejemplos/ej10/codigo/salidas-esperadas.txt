@@ -1,0 +1,74 @@
+SALIDAS ESPERADAS · clase 10 · heaps, colas de prioridad y HeapSort
+Partes A, B y C: exactas, iguales en cualquier computadora. Partes D y E (milisegundos): VARÍAN con la máquina y tienen ruido; lo que se repite es la forma:
+los cuatro ordenamientos son n log n (HeapSort suele quedar más lento que QuickSort por la caché), y el heap de tamaño k encuentra los k mayores en una fracción del tiempo de ordenar todo.
+Se obtiene con: dotnet run -c Release -- todo   (~13 s; o -- heap | prioridad | ordenar | torneo | topk)
+
+PARTE A · UN HEAP MÍNIMO CON 7 CLAVES (el arreglo ES el árbol)
+  Insertar 50:
+    arreglo: [50]   menor = 50
+  Insertar 30:
+      30 es menor que su padre 50 → intercambian (sube)
+    arreglo: [30, 50]   menor = 30
+  Insertar 70:
+    arreglo: [30, 50, 70]   menor = 30
+  Insertar 20:
+      20 es menor que su padre 50 → intercambian (sube)
+      20 es menor que su padre 30 → intercambian (sube)
+    arreglo: [20, 30, 70, 50]   menor = 20
+  Insertar 40:
+    arreglo: [20, 30, 70, 50, 40]   menor = 20
+  Insertar 60:
+      60 es menor que su padre 70 → intercambian (sube)
+    arreglo: [20, 30, 60, 50, 40, 70]   menor = 20
+  Insertar 10:
+      10 es menor que su padre 60 → intercambian (sube)
+      10 es menor que su padre 20 → intercambian (sube)
+    arreglo: [10, 30, 20, 50, 40, 70, 60]   menor = 10
+
+  Extraer el menor, tres veces (siempre sale el de la posición 0):
+      60 es mayor que su hijo 20 → intercambian (baja)
+    sale 10   → arreglo: [20, 30, 60, 50, 40, 70]
+      70 es mayor que su hijo 30 → intercambian (baja)
+      70 es mayor que su hijo 40 → intercambian (baja)
+    sale 20   → arreglo: [30, 40, 60, 50, 70]
+      70 es mayor que su hijo 40 → intercambian (baja)
+      70 es mayor que su hijo 50 → intercambian (baja)
+    sale 30   → arreglo: [40, 50, 60, 70]
+
+  Ver el menor cuesta O(1). Insertar y extraer cuestan O(log n): se sube o se baja a lo sumo la altura del árbol.
+
+====================================================================================================
+PARTE B · LA FILA DEL HOSPITAL: primero el más grave, no el que llegó primero
+  (gravedad 1 = crítico ... 5 = leve; en un empate, el que llegó antes)
+
+  Llegan en este orden: Ana(4), Beto(2), Carla(5), Diego(1), Elena(3), Fabian(2)
+  Los atienden en este orden: Diego(1), Beto(2), Fabian(2), Elena(3), Ana(4), Carla(5)
+
+  Con una cola normal (FIFO) Diego, que es el crítico, habría esperado a los otros cinco.
+  PriorityQueue de .NET es un heap: Enqueue y Dequeue cuestan O(log n); Peek (ver el primero), O(1).
+
+====================================================================================================
+PARTE C · HEAPSORT: armar un heap y sacar el mayor n veces
+         n   comparaciones      x     n × log2 n   comparaciones / (n log2 n)
+     1,000          16,820      —          9,966                         1.69
+     2,000          37,675   x2.2         21,932                         1.72
+     4,000          83,484   x2.2         47,863                         1.74
+     8,000         182,736   x2.2        103,726                         1.76
+    16,000         397,626   x2.2        223,453                         1.78
+  Doble de datos: un poco más del doble de comparaciones (n log n). Hasta 2 comparaciones por nivel: aquí ~1,7 a 1,8 × n log2 n.
+  Garantía: n log n SIEMPRE (no hay peor caso malo como en QuickSort) y ordena en el lugar, sin memoria extra.
+
+====================================================================================================
+PARTE D · EL TORNEO FINAL DE ORDENAMIENTOS (datos al azar)
+           n   HeapSort ms   MergeSort ms   QuickSort ms   Array.Sort ms
+     100,000           8.9           18.0           11.2             5.0
+   1,000,000         119.4           87.3           65.2            57.9
+   4,000,000         736.0          392.1          295.2           272.5
+  Los cuatro son n log n. HeapSort suele quedar más lento que QuickSort: salta por la memoria (padre e hijos están lejos) y la caché de la CPU lo siente.
+
+====================================================================================================
+PARTE E · LOS 10 MEJORES PUNTAJES DE 5.000.000 (ranking)
+  Heap de tamaño 10  : O(n log k)        3.7 ms
+  Ordenar todo      : O(n log n)      333.3 ms
+  ¿Mismos 10 mayores? sí
+  El heap solo mantiene 10 elementos: cada dato nuevo cuesta a lo sumo log 10. Es el truco de los rankings.
