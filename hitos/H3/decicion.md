@@ -1,66 +1,50 @@
-# Hito H3 - Estrategia voraz o dinamica
+# Hito H3 - Voraz, dinamica o no aplica
 
-## 1. Decision repetida del caso
+## 1. Caso real: notas 2026-M2
 
-En el caso de los pedidos de la pasteleria, cada vez que se prepara un pedido se debe elegir el siguiente elemento entre los pedidos pendientes.
+La decision y el resultado se toman sobre el archivo [notas_2026_M2.csv](../H2/notas_2026_M2.csv). El archivo contiene 250 registros reales de prueba, todos con un CI unico, y 156 estudiantes tienen estado `APROBADO`.
 
-La regla es:
+Las operaciones principales del caso son buscar por `ci`, consultar rangos de carnet o nota y recorrer los registros en orden. Estas operaciones se repiten, pero no eligen entre varias soluciones parciales para optimizar una cantidad global.
 
-1. elegir el plazo menor;
-2. si varios pedidos tienen el mismo plazo, elegir el que llego primero.
+Los resultados principales son independientes:
 
-El resultado que se quiere optimizar es el tiempo de la operacion completa de registrar y preparar una jornada de pedidos. Mas especificamente, se busca mantener la siguiente preparacion rapida y procesar todos los pedidos en el orden correcto.
+- un estudiante aprueba si su nota final es al menos 51 y su asistencia es al menos 80%;
+- un registro puede consultarse por `ci`;
+- un conjunto de registros puede recorrerse o filtrarse por rango.
 
-## 2. Aplicacion voraz
+Cada registro puede clasificarse con estas comparaciones sin decidir primero otra opcion que cambie el resto del conjunto.
 
-La seleccion de la mejor opcion disponible en cada momento es suficiente:
+## 2. ¿Voraz o dinamica?
 
-- primero se elige el pedido urgente;
-- luego el conjunto cambia;
-- se repite la misma eleccion sobre los pedidos restantes.
+No aplica una estrategia voraz ni una estrategia de programacion dinamica al problema principal de consolidacion.
 
-Por tanto, esta es una solucion voraz. No es necesario mirar combinaciones futuras ni calcular una solucion global para decidir el siguiente pedido.
+No es voraz porque no hay una seleccion local cuyo resultado optimice un conjunto final. Por ejemplo, considerar primero al estudiante con mayor nota no determina si el siguiente recibe una promocion valida; cada estado se calcula por sus propios umbrales.
 
-La prueba por intercambio es directa: si dos pedidos pendientes tienen plazos distintos y el de mayor plazo se prepara antes que el de menor plazo, intercambiarlos invierte el orden incorrecto y coloca primero al pedido mas urgente. El arreglo completo puede ordenarse repitiendo este razonamiento por plazo y, en caso de empate, por numero de llegada.
+No es programacion dinamica porque no aparecen subproblemas repetidos ni decisiones dependientes de una capacidad o de un estado anterior. Si se revisan los datos con un recorrido, cada estudiante se procesa una sola vez con resultados independientes. Tampoco hace falta guardar soluciones parciales como `dp[i][j]`.
 
-La estructura elegida fue una `PriorityQueue<string, long>` para extraer el minimo con costo $O(\log n)$ y un `HashSet<string>` para comprobar si un pedido sigue pendiente en $O(1)$ promedio.
+La estructura adecuada para el caso sigue siendo el acceso por clave y el recorrido ordenado, no una rutina voraz o dinamica. En el hito anterior se compara una lista lineal contra un `SortedDictionary` y se verifico que ambas producen el mismo resultado.
 
-| Operacion | Implementacion ingenua | Implementacion voraz |
+## 3. Problema analogo medido
+
+Para comparar las dos familias se usa una version analogica con los 156 registros aprobados del CSV.
+
+**Problema:** elegir registros con capacidad total de 8.000 puntos de asistencia. El peso de cada registro es `asistencia_pct` y el valor es `nota_final * 10`. Se busca maximizar la suma de valores sin superar la capacidad.
+
+Este problema es analogo al negocio solo como ejercicio de seleccion: usa datos reales del mismo archivo, pero no afirma que la secretaria tenga una capacidad de asistencia de 8.000 puntos.
+
+| Estrategia | Resultado medido | Tiempo medido |
 |---|---:|---:|
-| Registrar | $O(1)$ | $O(\log n)$ |
-| Preparar siguiente | $O(n)$ | $O(\log n)$ |
-| Saber si esta pendiente | $O(n)$ | $O(1)$ promedio |
+| Voraz: mayor cociente nota/peso | 7.181,5 puntos | 0,204 ms promedio |
+| Dinamica: mochila 0/1 exacta | 7.203,5 puntos | 488,321 ms promedio |
 
-## 3. Programacion dinamica
+El voraz recorre los registros ordenados por cociente nota/peso y agrega uno si cabe en la capacidad. En esta carga obtuvo 7.181,5 puntos.
 
-No se necesita programacion dinamica en este caso. Preparar un pedido no crea subproblemas que deban resolverse varias veces: eliminar el minimo deja una nueva instancia formada por el conjunto reducido y la propiedad optima sigue siendo elegir el minimo en ese conjunto.
+La dinamica usa estados `dp[c]` para la mejor suma que cabe en cada capacidad `c`. Revisa 156 registros y 8.001 capacidades, por lo que hay subproblemas que se reutilizan y el resultado exacto fue 7.203,5 puntos.
 
-La prioridad ya determina la decision, por lo que no existe un conjunto de estados solapados que convenga almacenar. Tampoco hay una funcion de valor del tipo `dp[i][j]` que mejore el resultado global.
+La diferencia fue de 22 puntos, y la carga demostro que el voraz puede ser mas rapido pero no garantiza el optimo en un problema de mochila 0/1.
 
-Si el objetivo fuera, por ejemplo, elegir pedidos con limites de tiempo y capacidad para obtener el beneficio maximo sin exceder una capacidad, entonces si seria necesario considerar subconjuntos solapados y usar programacion dinamica o knapsack. Ese problema no es el comportamiento real de la pasteleria descrito en el caso.
+## 4. Conclusion
 
-## 4. Comparacion medida
+Para `notas_2026_M2.csv`, el proceso principal no requiere voraz ni programacion dinamica. La clasificacion es directa y las consultas deben optimizarse con estructuras de datos adecuadas.
 
-Se utilizo la carga ya medida en `parcial2/Program.cs`: primero llegan `n` pedidos y despues se preparan todos. Las mediciones fueron tres corridas por tamano con `Stopwatch`, despues de un calentamiento.
-
-| Tamano | Lista ingenua - promedio | Cola voraz - promedio |
-|---:|---:|---:|
-| 5.000 | 315,790 ms | 7,218 ms |
-| 10.000 | 1.317,088 ms | 3,385 ms |
-| 20.000 | 5.181,585 ms | 7,337 ms |
-
-La solucion ingenua crecio aproximadamente 4,17 veces al pasar de 5.000 a 10.000 pedidos y 3,93 veces al pasar de 10.000 a 20.000. Esto concuerda con su costo cuadratico esperado.
-
-La solucion voraz permanecio alrededor de milisegundos y el factor entre 10.000 y 20.000 fue aproximadamente 2,17 en esa ejecucion, cercano al crecimiento $n \log n$ esperado. El primer salto es mas ruidoso por el entorno de ejecucion y el mecanismo JIT.
-
-Para el tamano final medido, la cola voraz fue aproximadamente 706 veces mas rapida que la lista ingenua:
-
-$$
-\frac{5181,585}{7,337} \approx 706
-$$
-
-La medicion completa y su protocolo estan en [medicion.md](../../parcial2/medicion.md).
-
-## 5. Conclusion
-
-Para este caso corresponde una estrategia voraz. Elegir el pedido con menor plazo, resolviendo empates por orden de llegada, produce el siguiente pedido esperado sin explorar alternativas ni resolver subproblemas repetidos. La cola de prioridad con el conjunto hash mantiene esta decision eficiente y la medicion evidencia la diferencia frente a la seleccion lineal.
+La comparacion análoga muestra la diferencia real: el voraz falla la solucion exacta en este problema de mochila, mientras que la dinamica explora estados repetidos y alcanza el optimo. Por tanto, el metodo debe elegirse segun el problema concreto y no sobre la presencia de un ciclo o una cantidad grande de datos.
