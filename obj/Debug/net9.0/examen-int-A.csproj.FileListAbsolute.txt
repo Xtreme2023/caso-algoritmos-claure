@@ -1,0 +1,15 @@
+D:\des\caso-algoritmos-claure\bin\Debug\net9.0\examen-int-A.exe
+D:\des\caso-algoritmos-claure\bin\Debug\net9.0\examen-int-A.deps.json
+D:\des\caso-algoritmos-claure\bin\Debug\net9.0\examen-int-A.runtimeconfig.json
+D:\des\caso-algoritmos-claure\bin\Debug\net9.0\examen-int-A.dll
+D:\des\caso-algoritmos-claure\bin\Debug\net9.0\examen-int-A.pdb
+D:\des\caso-algoritmos-claure\obj\Debug\net9.0\examen-int-A.GeneratedMSBuildEditorConfig.editorconfig
+D:\des\caso-algoritmos-claure\obj\Debug\net9.0\examen-int-A.AssemblyInfoInputs.cache
+D:\des\caso-algoritmos-claure\obj\Debug\net9.0\examen-int-A.AssemblyInfo.cs
+D:\des\caso-algoritmos-claure\obj\Debug\net9.0\examen-int-A.csproj.CoreCompileInputs.cache
+D:\des\caso-algoritmos-claure\obj\Debug\net9.0\examen-int-A.sourcelink.json
+D:\des\caso-algoritmos-claure\obj\Debug\net9.0\examen-int-A.dll
+D:\des\caso-algoritmos-claure\obj\Debug\net9.0\refint\examen-int-A.dll
+D:\des\caso-algoritmos-claure\obj\Debug\net9.0\examen-int-A.pdb
+D:\des\caso-algoritmos-claure\obj\Debug\net9.0\examen-int-A.genruntimeconfig.cache
+D:\des\caso-algoritmos-claure\obj\Debug\net9.0\ref\examen-int-A.dll

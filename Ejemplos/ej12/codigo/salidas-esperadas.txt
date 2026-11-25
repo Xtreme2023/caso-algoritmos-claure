@@ -1,0 +1,63 @@
+SALIDAS ESPERADAS · clase 12 · programación dinámica y panorama NP
+Partes B y C y los conteos de A: exactos, iguales en cualquier computadora. Los milisegundos (partes A, D y E) VARÍAN con la máquina; lo que se repite es la forma:
+Fib sin memoria ~x11 cada +5; la fuerza bruta de la mochila ~x4 cada 2 objetos; el agente viajero ~x(n) por ciudad (9, 10, 11...); la tabla casi no se mueve.
+Se obtiene con: dotnet run -c Release -- todo   (~9 s; o -- fibonacci | mochila | costo | viajante)
+
+PARTE A · FIBONACCI: la misma cuenta, tres maneras
+    n   llamadas SIN memoria   llamadas CON memoria               Fib(n)
+   10                    177                     19                   55
+   20                 21,891                     39                6,765
+   30              2,692,537                     59              832,040
+   40            331,160,281                     79          102,334,155
+  Sin memoria el costo se multiplica por ~1,6 cada +1 (exponencial). Con memoria, 2n-1 llamadas: lineal.
+
+    n   SIN memoria ms      x   CON memoria ms
+   30              3.4      —           0.0005
+   35             38.7  x11.2           0.0005
+   40            418.7  x10.8           0.0010
+
+  Con memoria o tabla, Fib(90) = 2,880,067,194,370,816,120 sale al instante.
+  Sin memoria necesitaría ~9 × 10^18 llamadas: unos 600 años a 500 millones por segundo (PROYECCIÓN, no medida).
+
+====================================================================================================
+PARTE B · LA MOCHILA: cada objeto tiene peso y valor; la mochila aguanta una capacidad
+  Objetos (peso, valor): 1 (2, 3) · 2 (3, 4) · 3 (4, 5) · 4 (5, 6) · capacidad 8
+     capacidad →  0  1  2  3  4  5  6  7  8
+     sin objetos  0  0  0  0  0  0  0  0  0
+     hasta obj 1  0  0  3  3  3  3  3  3  3
+     hasta obj 2  0  0  3  4  4  7  7  7  7
+     hasta obj 3  0  0  3  4  5  7  8  9  9
+     hasta obj 4  0  0  3  4  5  7  8  9 10
+
+  Valor máximo con capacidad 8: 10  → se llevan los objetos 2 y 4
+  Cada celda responde: «con estos objetos y esta capacidad, ¿cuánto valor máximo cabe?» y usa SOLO celdas ya calculadas.
+
+====================================================================================================
+PARTE C · LA MOCHILA DONDE EL VORAZ SE EQUIVOCA (la lección de la clase 11)
+  Objetos (peso, valor): (10, 60) · (20, 100) · (30, 120) · capacidad 50
+  Voraz «mayor valor por kilo»: razones 6, 5 y 4 → lleva (10, 60) y (20, 100): 160. El (30, 120) ya no cabe.
+  Programación dinámica: 220  → objetos 2 y 3 (pesos 20 + 30 = 50)
+  Fuerza bruta (probar los 8 subconjuntos): 220
+
+====================================================================================================
+PARTE D · MOCHILA: tabla (n × capacidad) CONTRA probar todos los subconjuntos (2^n)
+   objetos  valor óptimo   tabla ms   fuerza bruta ms      x
+        16           659      0.051               2.8      —
+        18           488      0.035              12.2   x4.3
+        20           626      0.037              51.4   x4.2
+        22           725      0.040             213.5   x4.2
+  Cada 2 objetos más, la fuerza bruta cuesta ~x4 (2^n). La tabla cuesta n × capacidad: crece de a poco.
+  Con 1.000 objetos y capacidad 10.000 la tabla tarda 41.4 ms (10 millones de celdas). La fuerza bruta probaría 2^1000 subconjuntos: imposible.
+
+====================================================================================================
+PARTE E · EL AGENTE VIAJERO: visitar n ciudades y volver, por el camino más corto
+  No se conoce un algoritmo eficiente (polinomial) para el caso general: es un problema NP-difícil.
+
+   ciudades  recorridos posibles (n-1)!    ms (probando todos)      x
+          8                       5,040                    0.1      —
+          9                      40,320                    0.4   x6.8
+         10                     362,880                    3.8   x8.5
+         11                   3,628,800                   43.3  x11.5
+
+  Cada ciudad más multiplica el trabajo por ~n. PROYECCIÓN (no medida): con 20 ciudades, 19! ≈ 1,2 × 10^17 recorridos.
+  NP no significa «imposible»: significa que nadie sabe resolverlo rápido en general. En la práctica se usan aproximaciones, heurísticas y casos pequeños.

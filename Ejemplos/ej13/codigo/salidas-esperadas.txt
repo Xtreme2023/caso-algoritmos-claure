@@ -1,0 +1,65 @@
+SALIDAS ESPERADAS · clase 13 · grafos, BFS y DFS
+Partes A, B y C: exactas, iguales en cualquier computadora. Parte D (milisegundos): VARÍA con la máquina; lo que se repite es la forma: BFS con lista ~x2 al duplicar los nodos; con matriz ~x4 (V²).
+Se obtiene con: dotnet run -c Release -- todo   (~5 s; o -- modelo | recorridos | componentes | representacion)
+
+PARTE A · EL MAPA DE MICROS COMO GRAFO (10 nodos, 9 aristas)
+  Lista de adyacencia (cada nodo guarda sus vecinos):
+    Plaza        → Terminal, Mercado
+    Terminal     → Plaza, Hospital
+    Mercado      → Plaza, Colegio, Parque
+    Hospital     → Terminal, Universidad
+    Colegio      → Mercado, Universidad
+    Parque       → Mercado, Estadio
+    Universidad  → Colegio, Hospital
+    Estadio      → Parque
+    Aeropuerto   → Hangar
+    Hangar       → Aeropuerto
+
+  Matriz de adyacencia (1 = hay tramo directo), primeras 6 paradas:
+                 Pla Ter Mer Hos Col Par
+    Plaza        0   1   1   0   0   0
+    Terminal     1   0   0   1   0   0
+    Mercado      1   0   0   0   1   1
+    Hospital     0   1   0   0   0   0
+    Colegio      0   0   1   0   0   0
+    Parque       0   0   1   0   0   0
+
+  Lista: memoria ~ V + E (solo lo que existe). Matriz: V × V (guarda también todos los «no hay tramo»).
+
+====================================================================================================
+PARTE B · DOS FORMAS DE RECORRER EL MAPA DESDE «Plaza»
+  BFS (a lo ancho, con una COLA): primero todos los vecinos, después los vecinos de los vecinos...
+    orden: Plaza → Terminal → Mercado → Hospital → Colegio → Parque → Universidad → Estadio
+    a 0 tramo(s): Plaza
+    a 1 tramo(s): Terminal, Mercado
+    a 2 tramo(s): Hospital, Colegio, Parque
+    a 3 tramo(s): Universidad, Estadio
+
+  Camino con MENOS tramos de Plaza a Estadio: Plaza → Mercado → Parque → Estadio  (3 tramos)
+
+  DFS (en profundidad, con una PILA): sigue un camino hasta el fondo y recién después vuelve.
+    orden: Plaza → Terminal → Hospital → Universidad → Colegio → Mercado → Parque → Estadio
+
+  BFS usa una cola y encuentra el camino con MENOS tramos. DFS usa una pila (o recursión) y sirve para explorar a fondo,
+  detectar ciclos y ordenar dependencias. Los dos visitan cada nodo y cada arista una vez: O(V + E).
+
+====================================================================================================
+PARTE C · ¿SE PUEDE LLEGAR DE UNA PARADA A OTRA? (componentes conexas)
+  Zona 1: Plaza, Terminal, Mercado, Hospital, Colegio, Parque, Universidad, Estadio  (8 paradas)
+  Zona 2: Aeropuerto, Hangar  (2 paradas)
+
+  Hay 2 zonas: desde «Plaza» NO se llega a «Aeropuerto». Una sola pasada de BFS por zona responde esto en O(V + E).
+
+====================================================================================================
+PARTE D · EL MISMO BFS, DOS REPRESENTACIONES (grafo ralo: unas 3 aristas por nodo)
+      nodos   lista ms      x   matriz ms      x   (lista: O(V+E) · matriz: O(V²))
+      2,000       0.09      —         4.0      —
+      4,000       0.19   x2.1        16.3   x4.0
+      8,000       0.52   x2.8        57.7   x3.5
+
+      nodos   BFS con lista ms      x    memoria de una matriz
+    100,000               18.2      —               1.2 GB (1 bit/casilla)
+    200,000               44.3   x2.4               5.0 GB (1 bit/casilla)
+    400,000               90.5   x2.0              20.0 GB (1 bit/casilla)
+    800,000              215.9   x2.4              80.0 GB (1 bit/casilla)
+  Con la lista, doble de nodos y aristas: ~x2. Una matriz de 800.000 × 800.000 no cabe en un computador normal. Elegir la representación es elegir si el problema se puede resolver.
