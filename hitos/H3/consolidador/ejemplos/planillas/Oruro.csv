@@ -1,0 +1,3 @@
+departamento;ci;nombre_completo;tipo;cod_materia;materia;modulo;parcial_1;parcial_2;examen_final;asistencias;sesiones;docente;fecha_envio
+ORURO;0;Maria Sin CI;MIEMBRO;A1;Nivel A1;2026-M2;90;90;90;12;12;DOCENTE DEMO;2026-11-04
+ORURO;9000009;Rosa Conflicto;MIEMBRO;A1;Nivel A1;2026-M2;70;70;70;12;12;DOCENTE DEMO;2026-11-04
